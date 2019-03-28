@@ -36,9 +36,9 @@ Contact:
 
 # Schedule
 
----
-
 Explain different parts of the schedule
+
+A mix of theory interwined with milestones with exercises.
 
 ---
 
@@ -176,10 +176,10 @@ fn main() {
     // Loop with break
     loop {
         if value >= 10 {
-	    break;
-	}
+        break;
+    }
 
-	value += 1;
+    value += 1;
     }
 }
 ```
@@ -252,6 +252,29 @@ enum Choice {
 ---
 
 # Exercise 1
+
+## <center>Build your own shell</center>
+
+* Step 1: install rust, test your installation (`rustc -V`)
+
+* Step 2: Write a shell which can run a single command on a separate process.
+
+---
+
+## <center>Build your own shell</center>
+
+``` rust
+fn main() {
+   loop {
+       // Read line from standard input
+       // "Parse" line into executable command
+       // Execute the command in a separate process
+       // Show output
+   }
+}
+```
+
+
 
 ---
 
