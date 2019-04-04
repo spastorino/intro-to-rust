@@ -166,7 +166,7 @@ fn main() {
 
 # Exercise 1
 
-- Go to this `intro-to-rust/exercises/1_if/src` project
+- Go to this `intro-to-rust/exercises/1_if` project
 - Try running `cargo test`
 - Make tests pass :)
 
