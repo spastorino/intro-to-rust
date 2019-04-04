@@ -154,7 +154,7 @@ fn main() {
 
     if value % 2 == 0 {
         // ...
-    } else if == 5 {
+    } else if value == 5 {
         // ...
     } else {
         /* ... */
