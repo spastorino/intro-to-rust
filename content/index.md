@@ -12,42 +12,35 @@ count: false
 
 # About me
 
-- Computer Science at Fing
 - WyeWorks co-founder
-- Ruby on Rails core team alumni
-- Following Rust since 2014
-- Started working with Rust in 2017
-- Member of Rust compiler NLL WG
+- Member of Rust compiler contributors team
 - Rust Latam conference organizer
 - Rust Montevideo Meetup organizer
-
-<div style="height: 2rem"></div>
-
-Contact:
-
-- Twitter/Github: spastorino
-- Email: spastorino@gmail.com
+- Ruby on Rails core alumni
 
 ---
 
 # About the workshop
 
-- Covering some syntax
-- Basic concepts
+- We'll cover the basics
+  - Assumes some familiarity with some systems programming concepts.
+  - Feel free to stop me at any time.
 
 ---
 
+<img src="content/images/rust-logo-blk.svg" alt="Rust logo" width="250rem" height="auto" style="position: absolute; right: 0rem; margin-top: -2rem;">
+
 # What is Rust?
 
-- "New" safe systems programming language
-- Developed by Mozilla research, v1.0 released in 2015
+- "New" & safe systems programming language
+  - Developed by Mozilla research, v1.0 released in 2015
 - Multiparadigm
-- Imperative, Structured, Functional, Concurrent, Generic, Compiled
-- Static strong Typing
-- Inference
+  - Imperative, structured, functional, concurrent, generic, compiled
+- Static strong typing
+  - Inference
 - Emphasizing control, safety, and speed
 - Free and open-source software, MIT License or Apache License 2.0
-- Most loved programming language (2016, 2017 & 2018)
+- Most loved programming language (2016, 2017, 2018 & 2019)
 
 ---
 
@@ -77,53 +70,78 @@ Rust has **great documentation**, a **friendly compiler** with useful error mess
 
 ---
 
-# Main use cases
+# Who is using Rust?
 
-- Systems programming in general
-  - Operating Systems
-  - Browsers
-  - Servers
-- Address hotspots of your app (Ruby, JavaScript, Python, etc)
-- Web Services, WebAssembly
-- Networking, Blockchain
-- Embedded, Microcontrollers, IoT
-- Games
-- Machine learning
-- Cli
+- **Mozilla** - Stylo, WebRender, Rustc.
+- **Google** - Fuschia operating system.
+- **Facebook** - Mercurial rewrite.
+- **Amazon** - Firecracker.
+- **Microsoft** - Azure IoT work.
+- **Dropbox** - Storage system.
+- **Redox OS** - Most complete Rust OS, microkernel design.
+
+You can see even more familiar names like **Twitter**, **npm**, **Red Hat**, **Reddit**, **Samsung**, **Cloudflare**, **Gnome**, **Chef**, **Canonical**, **Coursera**, **Tor** and many more.
 
 ---
 
-# Who uses Rust?
+# What is Rust being used for?
 
-- Mozilla (Stylo, WebRender)
-- Google (Fuschia operating system)
-- Facebook (Mercurial rewrite)
-- Amazon (Firecracker)
-- Microsoft (Azure IoT)
-- Dropbox (storage system)
-- Npm (npm core services)
-- Red Hat (storage system)
+- Operating Systems
+- Browsers
+- Address hot spots of your app (Python, Ruby, Elixir, JavaScript)
+- WebAssembly
+- Web APIs
+- Networking, Blockchain
+- Embedded, Microcontrollers, IoT
+- Games
 
 ---
 
 # Installation
 
 - Install Rust using [https://rustup.rs](https://rustup.rs) or any other way.
-- Run `rustc -V` to see if you’re golden.
+  - `curl https://sh.rustup.rs -sSf | sh`
+  - Run `rustc -V` to see if you’re golden.
 - Ensure you have git installed
-- git clone https://github.com/spastorino/intro-to-rust.git
+- `git clone https://github.com/spastorino/intro-to-rust.git`
+- You can also follow along using https://play.rust-lang.org/
+
+---
+
+# Installation
+
+- rustup --version
+  - Rust toolchain installer; enables you to easily switch between Rust
+    versions
+- rustc --version
+  - The Rust compiler, you'll be using it most of the time through cargo
+- cargo --version
+  - The Rust package manager; downloads and compiles your code and dependencies for you
 
 ---
 
 # Create a project with cargo
 
 ```shell
+# Create a minimal skeleton for a new application (--lib for libraries)
 $ cargo new myapp
+
+# Inspect the skeleton app
 $ cd myapp
+
+# Builds the binary app
 $ cargo build
+
+# Builds and run the binary app
 $ cargo run
-$ cargo doc
+
 # => Hello, world!
+
+# Builds and tests app
+$ cargo test
+
+# Generate Rustdoc and open it in the browser
+$ cargo doc --open
 ```
 
 ---
@@ -140,96 +158,50 @@ fn main() {
     let y = 15;
 
     let z = add_numbers(x, y);
+    // format string using Display trait and print it
     println!("{} + {} = {}", x, y, z);
 }
 ```
 
 ---
 
-# If
+# Control flow
 
 ```rust
 fn main() {
-    let value = 10;
+    // Bindings are immutable by default
+    let mut value = 4;
 
-    if value % 2 == 0 {
-        // ...
-    } else if value == 5 {
-        // ...
-    } else {
-        /* ... */
+    for i in 0..=100 {
+        if value % 2 == 0 {
+            while value < 10 {
+                value += i;
+            }
+            // ...
+            continue;
+        } else if value == 11 {
+            // ...
+            break;
+        } else {
+            /* ... */
+        }
     }
 }
 ```
 
 ---
 
-# Exercise 1
+# Exercise 1 (warm up)
 
-- Go to this `intro-to-rust/exercises/1_if` project
+- Go to this `intro-to-rust/exercises/1_control_flow` project
 - Try running `cargo test`
 - Make tests pass :)
+- Run `cargo run` and check that it prints all the leap years since 1000
+  until 2000
 
 ---
 
-# Loop
-
-```rust
-fn main() {
-    let mut value = 0;
-
-    // Loop with break
-    loop {
-        if value >= 10 {
-        break;
-    }
-
-    value += 1;
-    }
-}
-```
-
----
-
-# While
-
-```rust
-fn main() {
-    let mut value = 0;
-
-    // Break on conditional
-    while value < 10 {
-        value += 1;
-    }
-}
-```
-
----
-
-# For
-
-```rust
-fn main() {
-    let mut value = 0;
-
-    // Loop over iterator
-    for i in 0..10 {
-        value += i;
-    }
-}
-```
-
----
-
-# Exercise 2
-
-- Go to this `intro-to-rust/exercises/2_loops` project
-- Try running `cargo test`
-- Make tests pass :)
-
----
-
-# Struct
+# Structs
 
 ```rust
 struct Location {
@@ -259,14 +231,7 @@ impl Location {
 
 ---
 
-# Exercise 3
-
-- Go to this `intro-to-rust/exercises/3_structs` project
-- Open `src/main.rs` you will find guidance there
-
----
-
-# Enum
+# Enums
 
 ```rust
 struct Location {
@@ -289,9 +254,50 @@ enum Weather {
 
 ---
 
-# Exercise 4
+# Match
 
-- Go to this `intro-to-rust/exercises/4_enums` project
+```rust
+fn main() {
+    let weather = Weather::Sunny;
+
+    match weather {
+        Weather::Sunny => {
+            println!("Let's go out!!!");
+        }
+
+        Weather::Windy | Weather::Rainy | Weather::Snowy => {
+            println!("Let's stay home!!!");
+        }
+    }
+}
+```
+
+---
+
+# Match
+
+```rust
+fn main() {
+    let weather = Weather::Sunny;
+
+    match weather {
+        Weather::Sunny => {
+            println!("Let's go out!!!");
+        }
+
+        // Be careful with catch-all
+        _ => {
+            println!("Let's stay home!!!");
+        }
+    }
+}
+```
+
+---
+
+# Exercise 2
+
+- Go to this `intro-to-rust/exercises/2_structs_enums` project
 - Open `src/main.rs` you will find guidance there
 
 ---
@@ -322,7 +328,7 @@ enum Weather {
 - Values **moved** via assignment.
 - When final owner returns, **value is freed**.
 
-All this feels invisible and prevents _double free_ errors and _memory leaks_.
+All this feels invisible and prevents _double free_ errors, _use after free_ errors and _memory leaks_.
 
 ???
 
@@ -342,8 +348,7 @@ fn main() {
 }
 
 /// eat function takes ownership of the apple
-fn eat(apple_2: Apple) {
-}
+fn eat(apple_2: Apple) {}
 ```
 
 ---
@@ -480,9 +485,9 @@ fn deliver(bag: Vec<Apple>) {
 
 ---
 
-# Exercise 5
+# Exercise 3
 
-- Go to this `intro-to-rust/exercises/5_ownership/src` project
+- Go to this `intro-to-rust/exercises/3_ownership/src` project
 - Open `src/main.rs` you will find guidance there
 
 ---
@@ -541,7 +546,7 @@ fn main() {
     let mut bag = Vec::new();
     bag.push(apple);
     bag.push(Apple::new());
-*   deliver(&mut bag);        // Borrow the bag for mutation
+*   deliver(&mut bag); // Borrow the bag for mutation
     println!("Bag is now {}", bag);
 }
 
@@ -667,61 +672,10 @@ let mut buffer = format!("Hello");
 
 ---
 
-# Exercise 6
+# Exercise 4
 
-- Go to this `intro-to-rust/exercises/6_borrowing/src` project
+- Go to this `intro-to-rust/exercises/4_borrowing/src` project
 - Open `src/main.rs` you will find guidance there
-
----
-
-# Generics
-
-```rust
-enum Choice<T> {
-    Yes,
-    No,
-    Maybe(T),
-}
-```
-
----
-
-# Option<T>
-
-```rust
-enum Option<T> {
-    Some(T),
-    None,
-}
-```
-
-???
-
-null vs Option
-
----
-
-# Match
-
-```rust
-fn main() {
-    let value = "hello";
-
-    match value {
-        "hello" => {
-            println!("Hello world!");
-        }
-
-        "bye" => {
-            println!("Bye world!");
-        }
-
-        _ => {
-            println!("Don't know what you meant");
-        }
-    }
-}
-```
 
 ---
 
@@ -739,7 +693,6 @@ fn main() {
     let b = String::from("hi"); // String
 
     b.push_str(" world");
-
 }
 ```
 
@@ -749,21 +702,79 @@ UTF-8
 
 ---
 
-# Exercise 7 - Build your own shell
+# Option
 
-- Write a shell which can run a single command on a separate process.
+```rust
+// Presence or absense of value of generic type T
+enum Option<T> {
+    Some(T),
+    None,
+}
+```
 
 ---
 
-## <center>Build your own shell</center>
+# Option
+
+```rust
+fn print_first(v: Vec<String>) {
+    match v.first() {
+        Some(elem) => println!("{}", elem),
+        None => println!("Not found"),
+    }
+}
+```
+
+---
+
+# Result
+
+```rust
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
+```
+
+---
+
+# Error handling
+
+```rust
+#[derive(Debug)]
+enum Version { Version1, Version2 }
+
+fn parse_version(header: &[u8]) -> Result<Version, &'static str> {
+    match header.get(0) {
+        None => Err("invalid header length"),
+        Some(&1) => Ok(Version::Version1),
+        Some(&2) => Ok(Version::Version2),
+        Some(_) => Err("invalid version"),
+    }
+}
+
+fn main() {
+    let version = parse_version(&[1, 2, 3, 4]);
+    match version {
+        Ok(v) => println!("working with version: {:?}", v),
+        Err(e) => println!("error parsing header: {:?}", e),
+    }
+}
+```
+
+---
+
+# Exercise 5 - Build your own shell
+
+Write a shell which can run a single command on a separate process.
 
 ``` rust
 fn main() {
-   loop {
-       // Read line from standard input
-       // "Parse" line into executable command
-       // Execute the command in a separate process
-       // Show output
-   }
+    loop {
+        // Read line from standard input
+        // "Parse" line into executable command
+        // Execute the command in a separate process
+        // Show output
+    }
 }
 ```

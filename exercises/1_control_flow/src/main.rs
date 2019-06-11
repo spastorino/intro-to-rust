@@ -1,14 +1,21 @@
 fn main() {
-    /* you may leave it blank */
+    print_leap_years(1000, 2000);
 }
 
+// Exercise 1: Implement is_leap_year
+
 /// A leap year happens every four years
-/// except in year that are multiple of 100 and not multiple of 400.
+/// except in years that are multiple of 100 but not multiple of 400.
 /// Return `true` if `year` is a leap year and `false` otherwise
 fn is_leap_year(year: i32) -> bool {
     false
 }
 
+// Exercise 2: Implement print_leap_years
+
+/// Print numbers the leap numbers between `from` and `to` included.
+fn print_leap_years(from: i32, to: i32) {
+}
 
 // Tests
 
